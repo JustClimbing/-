@@ -8,3 +8,11 @@
 ·修改联系人：按照姓名重新修改指定联系人
 ·清空联系人：清空通讯录中所有信息
 ·退出通讯录：退出当前使用的通讯录*/
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	system("pause"); //按任意键继续，不会让程序一闪而过
+		return 0;
+}
