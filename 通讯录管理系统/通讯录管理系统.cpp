@@ -135,16 +135,50 @@ void showPerson(Addressbooks* abs)
 			}*/
 			cout << "性别：" << (abs->pesrsonArray[i].m_Sex == 1 ? "男" : "女") << "\t";
 			cout << "电话：" << abs->pesrsonArray[i].m_Phone << "\t";//输出电话
-			cout << "地址：" << abs->pesrsonArray[i].m_Addr << "\t";//输出住址
+			cout << "地址：" << abs->pesrsonArray[i].m_Addr << endl;//输出住址
 		}
+	}
+	system("pause");
+	system("cls");
+}
+
+//删除联系人功能
+//1、检测联系人是否存在
+int isExist(Addressbooks* abs, string name)
+{
+	for (int i = 0; i < abs->m_Size; i++)
+	{
+		if (abs->pesrsonArray[i].m_Name == name)
+		{
+			return i;
+		}
+		else { return -1; }
+	}
+}
+//2、找到并删除联系人
+void deletePerson(Addressbooks* abs)
+{
+	cout << "请输入您想要删除的联系人：" << endl;
+	string name;
+	cin >> name;
+	if (isExist(abs, name) == -1)
+	{
+		cout << "查无此人"<<endl;
+	}
+	else
+	{
+		for (int i = isExist(abs, name); i < abs->m_Size; i++)
+		{
+			abs->pesrsonArray[i] = abs->pesrsonArray[i + 1];
+		}
+		abs->m_Size--;
+		cout << "成功删除，可按2查看" << endl;
 	}
 	system("pause");
 	system("cls");
 
 
-
 }
-
 //菜单界面
 void showMenu()
 {
@@ -183,6 +217,7 @@ int main()
 			showPerson(&abs);
 			break;
 		case 3:// 3、删除联系人 
+			deletePerson(&abs);
 			break;
 		case 4:// 4、查找联系人 
 			break;
