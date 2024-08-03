@@ -290,7 +290,14 @@ void modifyPerson(Addressbooks* abs)
 	system("cls");
 
 }
-
+//清空通讯录
+void clean(Addressbooks* abs)
+{
+	abs->m_Size = 0;
+	cout << "已清空" << endl;
+	system("pause");
+	system("cls");
+}
 
 int main()
 {
@@ -325,6 +332,7 @@ int main()
 			modifyPerson(&abs);
 			break;
 		case 6:// 6、清空联系人
+			clean(&abs);
 			break;
 		case 0://退出功能
 			cout << "欢迎下次使用" << endl;
