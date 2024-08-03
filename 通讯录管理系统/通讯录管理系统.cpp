@@ -10,6 +10,103 @@
 ·退出通讯录：退出当前使用的通讯录*/
 #include <iostream>
 using namespace std;
+#include <string>
+#define MAX 1000 //便于维护
+
+//设计联系人结构体
+struct Person
+{
+	//姓名
+	string m_Name;
+	//年龄
+	int m_Age;
+	//性别 男1 女2
+	int m_Sex;
+	//电话
+	string m_Phone;
+	//住址
+	string m_Addr;
+};
+
+//设计通讯录结构体
+struct Addressbooks
+{
+	Person pesrsonArray[MAX];//通讯录中保存的联系人数组
+	int m_Size;//通讯录中人员个数
+
+};
+
+//添加联系人
+void addPerson(Addressbooks* abs)
+{
+	//判断通讯录是否满
+	if (abs->m_Size >= MAX)
+	{
+		cout << "通讯录已满！" << endl;
+		return;
+	}
+	else
+	{
+		//姓名
+		string name;
+		cout << "请输入联系人姓名：" << endl;
+		cin >> name;
+		abs->pesrsonArray[abs->m_Size].m_Name = name;
+		//年龄
+		int age;
+		cout << "请输入联系人年龄：" << endl;
+		cin >> age;
+		while (true)//判断年龄是否符合要求
+		{
+			if (age > 0&&age<100)
+			{
+				abs->pesrsonArray[abs->m_Size].m_Age = age;
+				break;
+			}
+			if (age >= 100)
+			{
+				abs->pesrsonArray[abs->m_Size].m_Age = age;
+				cout << "先生，请教我长寿秘诀！" << endl;
+				break;
+			}
+			cout << "你搁娘胎里啊？老弟！" << endl;
+		}
+		//性别
+		int sex;
+		cout << "请输入联系人性别：" << endl;
+		cout << "1--男" << endl;
+		cout << "2--女" << endl;
+		cin >> sex;
+		while (true)
+		{
+			if (sex == 1 || sex == 2)
+			{
+				abs->pesrsonArray[abs->m_Size].m_Sex = sex;
+				break;
+			}
+			cout << "世界上只有两种性别，老弟" << endl;
+		}
+		//电话
+		string phone;
+		cout << "请输入联系人电话：" << endl;
+		cin >> phone;
+		abs->pesrsonArray[abs->m_Size].m_Phone = phone;
+
+		//地址
+		string address;
+		cout << "请输入联系人地址：" << endl;
+		cin >> address;
+		abs->pesrsonArray[abs->m_Size].m_Addr = address;
+
+		//添加成功
+		cout << "添加成功" << endl;
+		
+		abs->m_Size++;
+		system("pause");
+		system("cls");
+
+	}
+}
 
 //菜单界面
 void showMenu()
@@ -27,17 +124,23 @@ void showMenu()
 
 int main()
 {
-	showMenu(); //调用菜单
+	
 
 	int select = 0;
+	//创建通讯录结构
+	Addressbooks abs;
+	//初始化人数
+	abs.m_Size = 0;
 	
 	//选择功能
 	while (true)//使其只有按0时才能退出
 	{
+		showMenu(); //调用菜单
 		cin >> select;
 		switch (select)
 		{
 		case 1:// 1、添加联系人 
+			addPerson(&abs);
 			break;
 		case 2:// 2、显示联系人 
 			break;
