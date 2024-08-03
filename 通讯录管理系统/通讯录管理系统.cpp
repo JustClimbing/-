@@ -55,9 +55,10 @@ void addPerson(Addressbooks* abs)
 		//年龄
 		int age;
 		cout << "请输入联系人年龄：" << endl;
-		cin >> age;
+		
 		while (true)//判断年龄是否符合要求
 		{
+			cin >> age;
 			if (age > 0&&age<100)
 			{
 				abs->pesrsonArray[abs->m_Size].m_Age = age;
@@ -70,21 +71,24 @@ void addPerson(Addressbooks* abs)
 				break;
 			}
 			cout << "你搁娘胎里啊？老弟！" << endl;
+			cout << "请输入正确年龄：" << endl;
 		}
 		//性别
 		int sex;
 		cout << "请输入联系人性别：" << endl;
 		cout << "1--男" << endl;
 		cout << "2--女" << endl;
-		cin >> sex;
+		
 		while (true)
 		{
+			cin >> sex;
 			if (sex == 1 || sex == 2)
 			{
 				abs->pesrsonArray[abs->m_Size].m_Sex = sex;
 				break;
 			}
 			cout << "世界上只有两种性别，老弟" << endl;
+			cout << "请输入正确性别：" << endl;
 		}
 		//电话
 		string phone;
@@ -106,6 +110,39 @@ void addPerson(Addressbooks* abs)
 		system("cls");
 
 	}
+}
+
+//显示联系人
+void showPerson(Addressbooks* abs)
+{
+	if (abs->m_Size == 0)
+	{
+		cout << "您的通讯录无联系人" << endl;
+	}
+	else
+	{
+		for (int i = 0; i < abs->m_Size; i++)
+		{
+			cout << "姓名："<<abs->pesrsonArray[i].m_Name << "\t";//输出名字
+			cout << "年龄："<<abs->pesrsonArray[i].m_Age << "\t";//输出年龄
+			//输出性别
+			/*if (abs->pesrsonArray[i].m_Sex == 1)
+			{
+				cout << "性别：男" << "\t";
+			}
+			else {
+				cout << "性别：女" << "\t";
+			}*/
+			cout << "性别：" << (abs->pesrsonArray[i].m_Sex == 1 ? "男" : "女") << "\t";
+			cout << "电话：" << abs->pesrsonArray[i].m_Phone << "\t";//输出电话
+			cout << "地址：" << abs->pesrsonArray[i].m_Addr << "\t";//输出住址
+		}
+	}
+	system("pause");
+	system("cls");
+
+
+
 }
 
 //菜单界面
@@ -142,7 +179,8 @@ int main()
 		case 1:// 1、添加联系人 
 			addPerson(&abs);
 			break;
-		case 2:// 2、显示联系人 
+		case 2:// 2、显示联系人
+			showPerson(&abs);
 			break;
 		case 3:// 3、删除联系人 
 			break;
