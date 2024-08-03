@@ -142,8 +142,8 @@ void showPerson(Addressbooks* abs)
 	system("cls");
 }
 
-//删除联系人功能
-//1、检测联系人是否存在
+
+//检测联系人是否存在
 int isExist(Addressbooks* abs, string name)
 {
 	for (int i = 0; i < abs->m_Size; i++)
@@ -152,10 +152,11 @@ int isExist(Addressbooks* abs, string name)
 		{
 			return i;
 		}
-		else { return -1; }
-	}
+	}return -1;
 }
-//2、找到并删除联系人
+
+//删除联系人功能
+//找到并删除联系人
 void deletePerson(Addressbooks* abs)
 {
 	cout << "请输入您想要删除的联系人：" << endl;
@@ -177,6 +178,30 @@ void deletePerson(Addressbooks* abs)
 	system("pause");
 	system("cls");
 
+
+}
+
+//查找联系人功能
+// 判断，找不到输出查无此人，找到了显示联系人
+void findPerson(Addressbooks* abs)
+{
+	//输入想要查找的名字
+	string name;
+	cout << "请输入你想要查找的联系人的名字："<<endl;
+	cin >> name;
+	if (isExist(abs, name) == -1)
+	{
+		cout << "查无此人" << endl;
+	}
+	else {
+		cout << "姓名：" << abs->pesrsonArray[isExist(abs, name)].m_Name << "\t";//输出名字
+		cout << "年龄：" << abs->pesrsonArray[isExist(abs, name)].m_Age << "\t";//输出年龄
+		cout << "性别：" << (abs->pesrsonArray[isExist(abs, name)].m_Sex == 1 ? "男" : "女") << "\t";
+		cout << "电话：" << abs->pesrsonArray[isExist(abs, name)].m_Phone << "\t";//输出电话
+		cout << "地址：" << abs->pesrsonArray[isExist(abs, name)].m_Addr << endl;//输出住址
+	}
+	system("pause");
+	system("cls");
 
 }
 //菜单界面
@@ -220,6 +245,7 @@ int main()
 			deletePerson(&abs);
 			break;
 		case 4:// 4、查找联系人 
+			findPerson(&abs);
 			break;
 		case 5:// 5、修改联系人 
 			break;
