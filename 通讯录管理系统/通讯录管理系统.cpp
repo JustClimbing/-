@@ -35,6 +35,19 @@ struct Addressbooks
 	int m_Size;//通讯录中人员个数
 
 };
+//菜单界面
+void showMenu()
+{
+	cout << "*************************" << endl;
+	cout << "***** 1、添加联系人 *****" << endl;
+	cout << "***** 2、显示联系人 *****" << endl;
+	cout << "***** 3、删除联系人 *****" << endl;
+	cout << "***** 4、查找联系人 *****" << endl;
+	cout << "***** 5、修改联系人 *****" << endl;
+	cout << "***** 6、清空联系人 *****" << endl;
+	cout << "***** 0、退出通讯录 *****" << endl;
+	cout << "*************************" << endl;
+}
 
 //添加联系人
 void addPerson(Addressbooks* abs)
@@ -204,19 +217,80 @@ void findPerson(Addressbooks* abs)
 	system("cls");
 
 }
-//菜单界面
-void showMenu()
+//修改联系人功能
+void modifyPerson(Addressbooks* abs)
 {
-	cout << "*************************" << endl;
-	cout << "***** 1、添加联系人 *****" << endl;
-	cout << "***** 2、显示联系人 *****"  << endl;
-	cout << "***** 3、删除联系人 *****" << endl;
-	cout << "***** 4、查找联系人 *****" << endl;
-	cout << "***** 5、修改联系人 *****" << endl;
-	cout << "***** 6、清空联系人 *****" << endl;
-	cout << "***** 0、退出通讯录 *****" << endl;
-	cout << "*************************" << endl;
+	cout << "请您选择你想要修改的联系人姓名：" << endl;
+	string name;
+	cin >> name;
+	int ret = isExist(abs, name);
+	if (ret == -1)
+	{
+		cout << "查无此人" << endl;
+	}
+	else
+	{
+		//姓名
+		string Name;
+		cout << "请修改联系人姓名：" << endl;
+		cin >> Name;
+		abs->pesrsonArray[ret].m_Name = Name;
+		//年龄
+		int age;
+		cout << "请修改联系人年龄：" << endl;
+
+		while (true)//判断年龄是否符合要求
+		{
+			cin >> age;
+			if (age > 0 && age < 100)
+			{
+				abs->pesrsonArray[ret].m_Age = age;
+				break;
+			}
+			if (age >= 100)
+			{
+				abs->pesrsonArray[ret].m_Age = age;
+				cout << "先生，请教我长寿秘诀！" << endl;
+				break;
+			}
+			cout << "你搁娘胎里啊？老弟！" << endl;
+			cout << "请输入正确年龄：" << endl;
+		}
+		//性别
+		int sex;
+		cout << "请修改联系人性别：" << endl;
+		cout << "1--男" << endl;
+		cout << "2--女" << endl;
+
+		while (true)
+		{
+			cin >> sex;
+			if (sex == 1 || sex == 2)
+			{
+				abs->pesrsonArray[ret].m_Sex = sex;
+				break;
+			}
+			cout << "世界上只有两种性别，老弟" << endl;
+			cout << "请输入正确性别：" << endl;
+		}
+		//电话
+		string phone;
+		cout << "请修改联系人电话：" << endl;
+		cin >> phone;
+		abs->pesrsonArray[ret].m_Phone = phone;
+
+		//地址
+		string address;
+		cout << "请修改联系人地址：" << endl;
+		cin >> address;
+		abs->pesrsonArray[ret].m_Addr = address;
+		cout << "修改成功" << endl;
+	}
+	system("pause");
+	system("cls");
+
 }
+
 
 int main()
 {
@@ -248,6 +322,7 @@ int main()
 			findPerson(&abs);
 			break;
 		case 5:// 5、修改联系人 
+			modifyPerson(&abs);
 			break;
 		case 6:// 6、清空联系人
 			break;
